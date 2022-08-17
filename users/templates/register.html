@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %} 
+
+
+{% url 'login' as lg %}
+<!-- <h1>Register</h1>
+<form  method="POST" action="{{reg}}">
+    {% csrf_token %}
+    {{ register_form.as_p }} }}                    
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+<p class="text-center">If you already have an account, <a href="{{lg}}">login</a> instead.</p> -->
+<div class="auth">
+    <div class="card">
+      <div class="auth__header text-center">
+        <a href="/">
+          <img src="images/icon.svg" alt="icon" />
+        </a>
+        <h3>Register</h3>
+        <p>Create a new  account</p>
+      </div>
+
+      <form method="POST" action="{{reg}}" class="form auth__form">
+        <!-- Input:Text -->
+        {% csrf_token %}
+        {% for field in register_form %}
+        <div class="form__field">
+          <label for="formInput#text">{{field.label}} </label>
+            {{field}}
+      {% if field.help_text %}
+                <small>{{field.help_text}}</small>
+                {% endif %}
+
+                {% for error in field.errors %}
+                <p style="color: red;">{{error}}</p>
+                {% endfor %}
+        </div>
+        {% endfor %}
+
+
+        <!-- Input:Email -->
+      
+
+        <!-- Input:Password -->
+     
+        <!-- Input:Password -->
+   
+        <div class="auth__actions">
+          <input class="btn btn--sub btn--lg" type="submit" value="Sign  In" />
+        </div>
+      </form>
+      <div class="auth__alternative">
+        <p>Already have an Account?</p>
+        <a href="{{lg}}">Log In</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
